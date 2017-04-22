@@ -7,7 +7,7 @@ require conf/machine/include/arm/arch-armv8.inc
 require conf/machine/include/soc-family.inc
 
 PREFERRED_PROVIDER_virtual/kernel = "linux"
-SERIAL_CONSOLES = "1500000;ttyS2"
+SERIAL_CONSOLES = "115200;ttyFIQ0"
 KERNEL_IMAGETYPE = "Image"
 KBUILD_DEFCONFIG = "multi_v8_defconfig"
 
