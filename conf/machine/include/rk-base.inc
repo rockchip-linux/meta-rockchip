@@ -39,8 +39,8 @@ DEFAULTTUNE_rk3399 ?= "aarch64"
 
 # Default kernel and versions
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-rockchip"
-PREFERRED_VERSION_linux-rockchip ??= "4.4"
-PREFERRED_VERSION_linux-rockchip_rv1109 ??= "3.10"
+PREFERRED_VERSION_linux-rockchip ??= "4.4.%"
+PREFERRED_VERSION_linux-rockchip_rv1109 ??= "3.10.%"
 
 # Serial console setup
 SERIAL_CONSOLES = "115200;ttyS2"
