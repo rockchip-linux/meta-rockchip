@@ -24,8 +24,8 @@ MALI_X11_rk3066 = "libmali-utgard-400-r7p0.so"
 MALI_WAYLAND_rk3066 = "libmali-utgard-400-r7p0-wayland.so"
 MALI_GBM_rk3066 = "libmali-utgard-400-r7p0-gbm.so"
 
-MALI_X11_rk3288 = "libmali-midgard-t76x-r14p0-r0p0.so"
-MALI_WAYLAND_rk3288 = "libmali-midgard-t76x-r14p0-r0p0-wayland.so "
+MALI_X11_rk3288 = "libmali-midgard-t76x-r14p0-r0p0-x11-gbm.so"
+MALI_WAYLAND_rk3288 = "libmali-midgard-t76x-r14p0-r0p0-wayland-gbm.so "
 MALI_GBM_rk3288 = "libmali-midgard-t76x-r14p0-r0p0-gbm.so "
 
 MALI_X11_rk3328 = "libmali-utgard-450-r7p0.so"
