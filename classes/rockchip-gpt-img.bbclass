@@ -148,17 +148,8 @@ EOF
 	mkfs.vfat -n "boot" -S 512 -C ${WORKDIR}/${BOOT_IMG} $BOOT_BLOCKS
 	mcopy -i ${WORKDIR}/${BOOT_IMG} -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin ::${KERNEL_IMAGETYPE}
 
-	DTS_FILE=""
-	DTBPATTERN="${KERNEL_IMAGETYPE}((-\w+)+\.dtb)"
-	for DFILES in ${DEPLOY_DIR_IMAGE}/*; do
-		DFILES=${DFILES##*/}
-		if echo "${DFILES}" | grep -P $DTBPATTERN ; then
-			[ -n "${DTS_FILE}" ] && bberror "Found multiple DTB under deploy dir, Please delete the unnecessary one."
-			DTS_FILE=${DFILES#*${KERNEL_IMAGETYPE}-}
-		fi
-	done
-
-	mcopy -i ${WORKDIR}/${BOOT_IMG} -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${DTS_FILE} ::${DTS_FILE}
+	DTS_FILE="$(basename "${KERNEL_DEVICETREE}")"
+	mcopy -i ${WORKDIR}/${BOOT_IMG} -s ${DEPLOY_DIR_IMAGE}/${DTS_FILE} ::${DTS_FILE}
 
 	# Create extlinux config file
 	cat >${WORKDIR}/extlinux.conf <<EOF
