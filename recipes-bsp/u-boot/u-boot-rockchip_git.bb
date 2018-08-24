@@ -3,7 +3,8 @@
 
 DEFAULT_PREFERENCE = "-1"
 
-include u-boot-rockchip.inc
+require u-boot-rockchip.inc
+require recipes-bsp/u-boot/u-boot.inc
 
 SRC_URI = " \
 	git://github.com/rockchip-linux/u-boot.git;branch=release; \

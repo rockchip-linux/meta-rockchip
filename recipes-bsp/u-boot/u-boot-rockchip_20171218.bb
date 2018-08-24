@@ -1,7 +1,8 @@
 # Copyright (C) 2017 Fuzhou Rockchip Electronics Co., Ltd
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-include u-boot-rockchip.inc
+require u-boot-rockchip.inc
+require recipes-bsp/u-boot/u-boot.inc
 
 TAG = "release-${PV}"
 SRC_URI = " \
