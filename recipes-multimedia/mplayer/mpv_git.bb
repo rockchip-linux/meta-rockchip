@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=91f1cb870c1cc2d31351a4d2595441cb"
 
 SRCREV = "459300222255ec6b42bdf276a309b721c282c794"
 SRC_URI = "git://github.com/mpv-player/mpv.git;branch=master \
-           http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf; \
+           http://www.freehackers.org/~tnagy/release/waf-1.8.12;downloadfilename=waf;name=waf;subdir=git \
 "
 S = "${WORKDIR}/git"
 
@@ -50,9 +50,10 @@ EXTRA_OECONF = " \
     ${PACKAGECONFIG_CONFARGS} \
 "
 
-do_configure_prepend () {
-    ln -sf ${WORKDIR}/waf-1.8.12 ${S}/waf
+adjust_waf_perms() {
     chmod +x ${S}/waf
 }
+
+do_patch[postfuncs] += "adjust_waf_perms"
 
 FILES_${PN} += "${datadir}/icons"
