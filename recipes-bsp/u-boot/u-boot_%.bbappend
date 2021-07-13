@@ -57,7 +57,7 @@ do_compile_append() {
 		make.sh
 
 	# Pack rockchip loader images
-	./make.sh ${UBOOT_MACHINE%_defconfig}
+	./make.sh
 
 	ln -sf *_loader*.bin "${RK_LOADER_BIN}"
 
