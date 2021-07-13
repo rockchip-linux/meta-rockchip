@@ -36,14 +36,6 @@ do_configure_prepend() {
 	for s in `grep -rIl python ${S}`; do
 		sed -i -e '1s|^#!.*python[23]*|#!/usr/bin/env nativepython|' $s
 	done
-
-	# Copy prebuilt images
-	if [ -e "${S}/${UBOOT_BINARY}" ]; then
-		bbnote "${PN}: Found prebuilt images."
-		mv ${S}/*.bin ${S}/*.img ${B}/
-	fi
-
-	[ -e "${S}/.config" ] && make -C ${S} mrproper
 }
 
 # Generate Rockchip style loader binaries
@@ -55,21 +47,17 @@ UBOOT_BINARY = "uboot.img"
 do_compile_append() {
 	cd ${B}
 
-	if [ -e "${B}/${UBOOT_BINARY}" ]; then
-		bbnote "${PN}: Using prebuilt images."
-	else
-		# Prepare needed files
-		for d in make.sh scripts configs arch/arm/mach-rockchip; do
-			cp -rT ${S}/${d} ${d}
-		done
+	# Prepare needed files
+	for d in make.sh scripts configs arch/arm/mach-rockchip; do
+		cp -rT ${S}/${d} ${d}
+	done
 
-		# Remove unneeded stages from make.sh
-		sed -i -e "/^select_tool/d" -e "/^clean/d" -e "/^\t*make/d" \
-			make.sh
+	# Remove unneeded stages from make.sh
+	sed -i -e "/^select_tool/d" -e "/^clean/d" -e "/^\t*make/d" \
+		make.sh
 
-		# Pack rockchip loader images
-		./make.sh ${UBOOT_MACHINE%_defconfig}
-	fi
+	# Pack rockchip loader images
+	./make.sh ${UBOOT_MACHINE%_defconfig}
 
 	ln -sf *_loader*.bin "${RK_LOADER_BIN}"
 
